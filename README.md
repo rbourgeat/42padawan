@@ -1,9 +1,11 @@
 # 42padawan
-My own 42 API front
+My own 42 API front build with FastAPI/Python & React/Vite/Chakra
 
 ## Requirements
 
-Docker
+- Install Docker
+
+- Create your App on [42 intra](https://profile.intra.42.fr/oauth/applications/new), use `http://localhost:8000/auth/callback` as Redirect URI and fill the `.env.example`
 
 ## Usage
 

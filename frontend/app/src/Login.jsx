@@ -9,24 +9,18 @@ import {
   useColorMode,
 } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const navigate = useNavigate(); // Hook to programmatically navigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Redirect to the FastAPI login endpoint
-    window.location.href = 'http://localhost:8000/login'; // Replace with your FastAPI server URL
+    window.location.href = 'http://localhost:8000/login';
   };
 
   return (
     <Box p={8} maxWidth="400px" mx="auto">
       <Flex justify="flex-end" align="center" mb={6} position="absolute" top={4} right={4} zIndex="999">
-        <Button variant='ghost' colorScheme='teal' mr={2}>
-          <Link to="/register">Register</Link>
-        </Button>
         <IconButton
           onClick={toggleColorMode}
           isRound={true}
@@ -38,7 +32,7 @@ const Login = () => {
         />
       </Flex>
       <Heading textAlign="center" mb={6}>
-        Login
+        42padawan
       </Heading>
       <form onSubmit={handleSubmit}>
         <Stack spacing={3}>

@@ -1,7 +1,7 @@
 import httpx
 import os
 
-from fastapi import FastAPI, Request, Depends, HTTPException
+from fastapi import FastAPI, Request, Response, Depends, HTTPException
 from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from fastapi.middleware.cors import CORSMiddleware
@@ -42,6 +42,11 @@ def login():
         f"{AUTHORIZATION_BASE_URL}?client_id={CLIENT_ID}&redirect_uri={REDIRECT_URI}&response_type=code"
     )
     return RedirectResponse(authorization_url)
+
+@app.get("/logout")
+async def logout(response: Response):
+    response.delete_cookie(key="authToken")
+    return {"detail": "Logged out"}
 
 @app.get("/auth/callback")
 async def auth_callback(code: str, request: Request):

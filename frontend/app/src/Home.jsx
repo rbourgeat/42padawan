@@ -23,11 +23,15 @@ import {
   AccordionPanel,
   Switch,
   FormLabel,
-  Link
+  Link,
+  IconButton,
+  useColorMode
 } from '@chakra-ui/react';
 import { MdEmail, MdLocationOn, MdMonetizationOn, MdDateRange } from 'react-icons/md';
+import { FaMoon, FaSun } from 'react-icons/fa';
 
 const Home = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const [profile, setProfile] = useState(null);
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
@@ -66,6 +70,17 @@ const Home = () => {
       fetchEvents();
     }
   }, [profile]);
+
+  const handleLogout = async () => {
+    try {
+      await axios.get('http://localhost:8000/logout', { withCredentials: true });
+
+      window.location.replace('/login');
+    } catch (error) {
+      console.error("Logout failed:", error);
+      setError(error);
+    }
+  };
 
   if (error) {
     return (
@@ -131,7 +146,23 @@ const Home = () => {
 
   return (
     <Box p={8}>
-      <Heading>Profile Information</Heading>
+      <Flex justify="flex-end" align="center" mb={6} position="absolute" top={4} right={4} zIndex="999">
+        <Button variant='ghost' colorScheme='teal' mr={2} onClick={handleLogout}>
+          Logout
+				</Button>
+        <IconButton
+          onClick={toggleColorMode}
+          isRound={true}
+          variant='solid'
+          colorScheme='teal'
+          aria-label='Toggle theme'
+          fontSize='20px'
+          icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
+        />
+      </Flex>
+      <Heading textAlign="center" mb={6}>
+        42padawan
+      </Heading>
       <Flex direction="row" align="center" mt={8}>
         <Image
           borderRadius="full"
@@ -211,7 +242,7 @@ const Home = () => {
         </Accordion>
       </Box>
       <Stack spacing={4} mt={4}>
-        <Button onClick={() => setIsOpen(!isOpen)} colorScheme="blue">
+        <Button onClick={() => setIsOpen(!isOpen)} colorScheme='teal'>
           {isOpen ? 'Hide Debug' : 'Show Debug'}
         </Button>
         <Collapse in={isOpen}>
