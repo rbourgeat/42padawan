@@ -38,7 +38,7 @@ const ProjectsCheck = ({ projects_users, projects }) => {
               }
 
               return (
-                <GridItem key={project.slug} rowSpan={1}>
+                <GridItem key={project.name} rowSpan={1}>
                   <Link href={`https://projects.intra.42.fr/projects/${project.slug}`} isExternal>
                     <Flex align="center" color={color} mb={2}>
                       <Icon as={icon} mr={2} />

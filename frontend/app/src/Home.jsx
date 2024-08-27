@@ -25,7 +25,8 @@ import {
   FormLabel,
   Link,
   IconButton,
-  useColorMode
+  useColorMode,
+  Grid
 } from '@chakra-ui/react';
 import { 
   MdEmail,
@@ -34,7 +35,9 @@ import {
   MdDateRange,
   MdExplore,
   MdChecklistRtl,
-  MdArrowForward
+  MdArrowForward,
+  MdClear,
+  MdCheck
 } from 'react-icons/md';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
@@ -254,6 +257,32 @@ const Home = () => {
     }
   };
 
+  const numberOfInternship = () => {
+    let n = 0;
+  
+    const projects = [
+      "internship-i",
+      "internship-ii",
+      "42cursus-startup-internship",
+      "apprentissage-1-an",
+      "fr-apprentissage-rncp-7-1-an",
+      "fr-apprentissage-rncp-7-2-ans",
+      "fr-apprentissage-rncp-6-1-an",
+      "fr-apprentissage-rncp-6-2-ans",
+      "42cursus-apprentissage-2-ans-1ere-annee",
+      "apprentissage-2-ans-2eme-annee"
+    ];
+  
+    const statuses = projects.map(slug => {
+      const projectUser = profile.projects_users.find(p => p.project.slug === slug);
+      return projectUser ? projectUser.status : null;
+    });
+  
+    n += statuses.filter(status => status === "finished").length;
+
+    return n;
+  };  
+
   return (
     <Box p={8}>
       <Flex justify="flex-end" align="center" mb={6} position="absolute" top={4} right={4} zIndex="999">
@@ -376,6 +405,28 @@ const Home = () => {
                     <Icon as={MdArrowForward} ml={2} />
                   </Flex>
                 </Link>
+                <Text>Pour les 2 options, il vous faut :</Text>
+                <Grid pl={4}>
+                  <Flex align="center" color={profile.projects_users.find(p => p.project.slug === "ft_transcendence").status == "finished" ? "green.400" : "gray.500" } mb={2}>
+                    <Icon as={profile.projects_users.find(p => p.project.slug === "ft_transcendence")?.status == "finished" ? MdCheck : MdClear } mr={2} />
+                    <Text>Completer le <strong>tronc commun</strong>.</Text>
+                  </Flex>
+                  <Flex align="center" mb={2}>
+                    <Text>Avoir validé <strong>deux projets de groupe après le tronc commun.</strong></Text>
+                  </Flex>
+                  <Flex align="center" color={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? "green.400" : "gray.500" } mb={2}>
+                    <Icon as={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? MdCheck : MdClear } mr={2} />
+                    <Text>Atteindre le level <strong>21</strong>. (Your Level: {profile.cursus_users[profile.cursus_users.length - 1].level})</Text>
+                  </Flex>
+                  <Flex align="center" color={filteredEvents.length > 15 ? "green.400" : "gray.500" } mb={2}>
+                    <Icon as={filteredEvents.length > 15 ? MdCheck : MdClear } mr={2} />
+                    <Text>Avoir participé à au moins <strong>15 évènements pédagogiques</strong> depuis le début de votre cursus (hors event de type extern et association).</Text>
+                  </Flex>
+                  <Flex align="center" color={numberOfInternship() > 2 ? "green.400" : "gray.500" } mb={2}>
+                  <Icon as={numberOfInternship() > 2 ? MdCheck : MdClear } mr={2} />
+                    <Text>Avoir au moins <strong>2 expériences professionnelles à temps plein</strong> dans votre cursus.</Text>
+                  </Flex>
+                </Grid>
                 <Text>Valider <strong>un</strong> des projets de la catégorie <strong>""Suite""</strong> :</Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={suiteProjects} />
                 <Text><strong>Option 1:</strong> Système d'information et réseaux</Text>
