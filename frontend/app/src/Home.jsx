@@ -30,6 +30,8 @@ import {
 import { MdEmail, MdLocationOn, MdMonetizationOn, MdDateRange } from 'react-icons/md';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
+import ProgressBar from './components/ProgressBar';
+
 const Home = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [profile, setProfile] = useState(null);
@@ -196,6 +198,7 @@ const Home = () => {
           </Box>
         </Box>
       </Flex>
+      <ProgressBar level={profile.cursus_users[profile.cursus_users.length - 1].level} />
       <Box mt={8}>
         <Accordion allowMultiple>
           <AccordionItem>
