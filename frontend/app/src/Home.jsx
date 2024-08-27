@@ -27,10 +27,19 @@ import {
   IconButton,
   useColorMode
 } from '@chakra-ui/react';
-import { MdEmail, MdLocationOn, MdMonetizationOn, MdDateRange } from 'react-icons/md';
+import { 
+  MdEmail,
+  MdLocationOn,
+  MdMonetizationOn,
+  MdDateRange,
+  MdExplore,
+  MdChecklistRtl,
+  MdArrowForward
+} from 'react-icons/md';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
 import ProgressBar from './components/ProgressBar';
+import ProjectsCheck from './components/ProjectsCheck';
 
 const Home = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -40,6 +49,105 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hideEvents, setHideEvents] = useState(false);
   const navigate = useNavigate();
+
+  const suiteProjects = [
+    { slug: '42cursus-42sh', name: '42sh' },
+    { slug: 'bgp-at-doors-of-autonomous-systems-is-simple', name: 'BADASS' },
+    { slug: '42cursus-doom-nukem', name: 'DoomNukem' },
+    { slug: 'inception-of-things', name: 'Inception Of Things' },
+    { slug: '42cursus-humangl', name: 'HumanGL' },
+    { slug: '42cursus-kfs-2', name: 'kfs-2' },
+    { slug: '42cursus-override', name: 'Override' },
+    { slug: '42cursus-pestilence', name: 'Pestilence' },
+    { slug: '42cursus-rt', name: 'RT' },
+    { slug: '42cursus-total-perspective-vortex', name: 'Total perspective vortex' }
+  ];
+
+  const option1ProjectsUnix = [
+    { slug: 'libasm', name: 'libasm' },
+    { slug: '42cursus-zappy', name: 'zappy' },
+    { slug: '42cursus-gbmu', name: 'gbmu' },
+    { slug: '42cursus-ft_linux', name: 'ft_linux' },
+    { slug: '42cursus-little-penguin-1', name: 'little penguin' },
+    { slug: '42cursus-taskmaster', name: 'taskmaster' },
+    { slug: '42cursus-strace', name: 'strace' },
+    { slug: '42cursus-malloc', name: 'malloc' },
+    { slug: '42cursus-matt-daemon', name: 'Matt Daemon' },
+    { slug: 'nm', name: 'nm' },
+    { slug: '42cursus-lem-ipc', name: 'lem_ipc' },
+    { slug: '42cursus-kfs-1', name: 'KFS 1' },
+    { slug: '42cursus-kfs-2', name: 'KFS 2' },
+    { slug: '42cursus-kfs-3', name: 'KFS 3' },
+    { slug: '42cursus-kfs-4', name: 'KFS 4' },
+    { slug: '42cursus-kfs-5', name: 'KFS 5' },
+    { slug: '42cursus-kfs-6', name: 'KFS 6' },
+    { slug: '42cursus-kfs-7', name: 'KFS 7' },
+    { slug: '42cursus-kfs-8', name: 'KFS 8' },
+    { slug: '42cursus-kfs-9', name: 'KFS 9' },
+    { slug: '42cursus-kfs-10', name: 'KFS 10' }
+  ];
+
+  const option1ProjectsSys = [
+    { slug: '42cursus-cloud-1', name: 'cloud-1' },
+    { slug: 'bgp-at-doors-of-autonomous-systems-is-simple', name: 'BADASS' },
+    { slug: 'inception-of-things', name: 'Inception Of Things' },
+    { slug: '42cursus-taskmaster', name: 'taskmaster' },
+    { slug: '42cursus-ft_ping', name: 'ft_ping' },
+    { slug: '42cursus-ft_traceroute', name: 'ft_traceroute' },
+    { slug: '42cursus-ft_nmap', name: 'ft_nmap' },
+    { slug: '', name: 'Active Discovery' },
+    { slug: '', name: 'Automatic Directory' },
+    { slug: '', name: 'Administrative Directory' },
+    { slug: '', name: 'Accessible Directory' }
+  ];
+
+  const option1ProjectsSec = [
+    { slug: 'ft_malcolm', name: 'ft_malcolm' },
+    { slug: '42cursus-ft_ssl_md5', name: 'ft_ssl_md5' },
+    { slug: '42cursus-darkly', name: 'Darkly' },
+    { slug: '42cursus-snow-crash', name: 'Snowcrash' },
+    { slug: '42cursus-rainfall', name: 'Rainfall' },
+    { slug: '42cursus-override', name: 'Override' },
+    { slug: '42cursus-boot2root', name: 'boot2root' },
+    { slug: '42cursus-ft_shield', name: 'ft_shield' },
+    { slug: '42cursus-woody-woodpacker', name: 'Woody Woodpacker' },
+    { slug: '42cursus-famine', name: 'Famine' },
+    { slug: '42cursus-pestilence', name: 'Pestilence' },
+    { slug: 'cybersecurity', name: 'Piscine Cybersecurity' },
+    { slug: 'unleashthebox', name: 'UnleashTheBox' },
+    { slug: '', name: 'Active Connect' },
+    { slug: '', name: 'MicroForensX' },
+    { slug: '', name: 'ActiveTechTales' }
+  ];
+
+  const option2ProjectsWeb = [
+    { slug: '42cursus-piscine-php-symfony', name: 'Piscine PHP Symphany' },
+    { slug: 'piscine-django', name: 'Piscine python Django' },
+    { slug: '42cursus-piscine-ruby-on-rails', name: 'Piscine Ruby on Rails' },
+    { slug: '42cursus-camagru', name: 'Camagru' },
+    { slug: '42cursus-matcha', name: 'Matcha' },
+    { slug: '42cursus-hypertube', name: 'Hypertube' },
+    { slug: '42cursus-red-tetris', name: 'Red Tetris' },
+    { slug: '42cursus-darkly', name: 'Darkly' },
+    { slug: '42cursus-h42n42', name: 'h42n42' },
+    { slug: 'tokenizer', name: 'Tokenizer' },
+  ];
+
+  const option2ProjectsAI = [
+    { slug: '', name: 'Piscine Machine Learning' },
+    { slug: '42cursus-ft_linear_regression', name: 'Linear regression' },
+    { slug: '42cursus-dslr', name: 'DSLR' },
+    { slug: '42cursus-multilayer-perceptron', name: 'Multi layer perceptron' },
+    { slug: '42cursus-gomoku', name: 'Gomoku' },
+    { slug: '42cursus-total-perspective-vortex', name: 'Total perspective vortex' },
+    { slug: '42cursus-expert-system', name: 'Expert system' },
+    { slug: '42cursus-krpsim', name: 'Krpsim' },
+    { slug: 'matrix', name: 'Matrix' },
+    { slug: 'ready-set-boole', name: 'Ready set boole' },
+    { slug: 'leaffliction', name: 'Leaffliction' },
+    { slug: 'piscine-data-science', name: 'Piscine Data Science' },
+    { slug: 'python-for-data-science', name: 'Piscine Python for Data Science' },
+  ];
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -180,6 +288,9 @@ const Home = () => {
           </Flex>
           <Box color="gray.500">
             <Flex align="center" mb={2}>
+              <ProgressBar level={profile.cursus_users[profile.cursus_users.length - 1].level} />
+            </Flex>
+            <Flex align="center" mb={2}>
               <Icon as={MdEmail} mr={2} />
               <Text fontSize="md"><strong>Mail:</strong> {profile.email}</Text>
             </Flex>
@@ -188,8 +299,8 @@ const Home = () => {
               <Text fontSize="md"><strong>Promotion:</strong> {profile.pool_month} {profile.pool_year}</Text>
             </Flex>
             <Flex align="center" mb={2}>
-              <Icon as={MdLocationOn} mr={2} />
-              <Text fontSize="md"><strong>Location:</strong> {profile.location}</Text>
+              <Icon as={MdExplore} mr={2} />
+              <Text fontSize="md"><strong>Location:</strong> {profile.location ? profile.location : "At Home"}</Text>
             </Flex>
             <Flex align="center" mb={2}>
               <Icon as={MdMonetizationOn} mr={2} />
@@ -198,7 +309,6 @@ const Home = () => {
           </Box>
         </Box>
       </Flex>
-      <ProgressBar level={profile.cursus_users[profile.cursus_users.length - 1].level} />
       <Box mt={8}>
         <Accordion allowMultiple>
           <AccordionItem>
@@ -239,6 +349,57 @@ const Home = () => {
                     </Flex>
                   </ListItem>
                 ))}
+              </List>
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <Flex align="center">
+                  <Icon as={MdChecklistRtl} mr={2} />
+                  RNCP 7
+                </Flex>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <List spacing={2}>
+                <Link color='blue.400' fontWeight="bold" href='https://meta.intra.42.fr/articles/rncp-7-certificate'>
+                  <Flex align="center">
+                    Official Page Here
+                    <Icon as={MdArrowForward} ml={2} />
+                  </Flex>
+                </Link>
+                <Link color='pink.400' fontWeight="bold" href='https://meta.intra.42.fr/articles/graduation-jury'>
+                  <Flex align="center">
+                    Next Jury Here
+                    <Icon as={MdArrowForward} ml={2} />
+                  </Flex>
+                </Link>
+                <Text>Valider <strong>un</strong> des projets de la catégorie <strong>""Suite""</strong> :</Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={suiteProjects} />
+                <Text><strong>Option 1:</strong> Système d'information et réseaux</Text>
+                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                  Unix/Kernel - minimum 30000XP et minimum 2 projets.
+                </Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={option1ProjectsUnix} />
+                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                  System administration - minimum 50000XP et 3 projets.
+                </Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={option1ProjectsSys} />
+                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                  Security - minimum 50000XP et 3 projets.
+                </Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={option1ProjectsSec} />
+                <Text><strong>Option 2:</strong> Architecture des bases de données et data</Text>
+                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                  Web - Database - minimum 50000XP et minimum 2 projets.
+                </Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={option2ProjectsWeb} />
+                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                  Artificial Intelligence - minimum 70000XP et minimum 3 projets.
+                </Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={option2ProjectsAI} />
               </List>
             </AccordionPanel>
           </AccordionItem>
