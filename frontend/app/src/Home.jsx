@@ -16,17 +16,20 @@ import {
   Icon,
   List,
   ListItem,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
+  TabList,
+  Tabs,
+  Tab,
+  TabPanels,
+  TabPanel,
+  TabIndicator,
   Switch,
   FormLabel,
   Link,
   IconButton,
   useColorMode,
-  Grid
+  Grid,
+  SimpleGrid,
+  Progress
 } from '@chakra-ui/react';
 import { 
   MdEmail,
@@ -35,11 +38,11 @@ import {
   MdDateRange,
   MdExplore,
   MdChecklistRtl,
-  MdArrowForward,
   MdClear,
-  MdCheck
+  MdCheck,
+  MdAutoGraph
 } from 'react-icons/md';
-import { FaMoon, FaSun } from 'react-icons/fa';
+import { FaMoon, FaSun, FaExternalLinkAlt } from 'react-icons/fa';
 
 import ProgressBar from './components/ProgressBar';
 import ProjectsCheck from './components/ProjectsCheck';
@@ -237,23 +240,23 @@ const Home = () => {
   const eventBackgroundColor = (kind) => {
     switch (kind) {
       case 'meet_up':
-        return '#00babc';
+        return 'linear-gradient(160deg, #00babc 0%, #80D0C7 100%)';
       case 'event':
-        return '#00babc';
+        return 'linear-gradient(160deg, #00babc 0%, #80D0C7 100%)';
       case 'conference':
-        return '#00babc';
+        return 'linear-gradient(160deg, #00babc 0%, #80D0C7 100%)';
       case 'pedago':
-        return '#ED8179';
+        return 'linear-gradient(160deg, #ED8179 0%, #80D0C7 100%)';
       case 'workshop':
-        return '#39D88F';
+        return 'linear-gradient(160deg, #39D88F 0%, #80D0C7 100%)';
       case 'hackathon':
-        return '#39D88F';
+        return 'linear-gradient(160deg, #39D88F 0%, #80D0C7 100%)';
       case 'association':
-        return '#a2b3e5';
+        return 'linear-gradient(160deg, #a2b3e5 0%, #80D0C7 100%)';
       case 'extern':
-        return '#c0c0c0';
+        return 'linear-gradient(160deg, #c0c0c0 0%, #80D0C7 100%)';
       default:
-        return '#c0c0c0';
+        return 'linear-gradient(160deg, #c0c0c0 0%, #80D0C7 100%)';
     }
   };
 
@@ -296,10 +299,11 @@ const Home = () => {
           colorScheme='teal'
           aria-label='Toggle theme'
           fontSize='20px'
+          boxShadow="lg"
           icon={colorMode === 'light' ? <FaMoon /> : <FaSun />}
         />
       </Flex>
-      <Heading textAlign="center" mb={6}>
+      <Heading textAlign="center" mb={6} bgGradient='linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)' bgClip='text' >
         42padawan
       </Heading>
       <Flex direction="row" align="center" mt={8}>
@@ -308,6 +312,7 @@ const Home = () => {
           boxSize="150px"
           src={profile.image.versions.large}
           alt={profile.usual_full_name}
+          boxShadow="lg"
           mr={6}
         />
         <Box>
@@ -338,19 +343,62 @@ const Home = () => {
           </Box>
         </Box>
       </Flex>
+
       <Box mt={8}>
-        <Accordion allowMultiple>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <Flex align="center" mb={2}>
-                  <Icon as={MdDateRange} mr={2} />
-                  Your Events ({filteredEvents.length})
-                </Flex>
+        <Tabs variant="unstyled">
+          <TabList>
+            <Tab>
+              <Flex align="center" mr={2}>
+                <Icon as={MdAutoGraph} mr={2} />
+                Skills
+              </Flex>
+            </Tab>
+            <Tab>
+              <Flex align="center" mr={2}>
+                <Icon as={MdDateRange} mr={2} />
+                Your Events ({filteredEvents.length})
+              </Flex>
+            </Tab>
+            <Tab>
+              <Flex align="center">
+                <Icon as={MdChecklistRtl} mr={2} />
+                RNCP 7
+              </Flex>
+            </Tab>
+            <Tab isDisabled>
+              <Flex align="center">
+                <Icon as={MdChecklistRtl} mr={2} />
+                RNCP 6
+              </Flex>
+            </Tab>
+          </TabList>
+          <TabIndicator mt='-1.5px' height='2px' bgGradient='linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)' borderRadius="md" />
+
+          <TabPanels>
+            <TabPanel>
+              <Box p={5}>
+                <SimpleGrid>
+                  {profile.cursus_users[profile.cursus_users.length - 1].skills.map(skill => (
+                    <Box key={skill.id} p={1}>
+                      <Text mb={2}><strong>{skill.name}</strong> <Text as="span" color="gray.500">({((skill.level / 20) * 100).toFixed(1)}%)</Text></Text>
+                      <Progress 
+                        value={(skill.level / 20) * 100}
+                        size="lg" 
+                        borderRadius="md"
+                        sx={{
+                          '& > div': {
+                            bgGradient: 'linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)',
+                            boxShadow: 'lg',
+                          }
+                        }}
+                      />
+                    </Box>
+                  ))}
+                </SimpleGrid>
               </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
+            </TabPanel>
+
+            <TabPanel>
               <Flex>
                 <Switch
                   id="hide-events"
@@ -363,101 +411,114 @@ const Home = () => {
               </Flex>
               <List spacing={3} mt={4}>
                 {filteredEvents.map((event) => (
-                  <ListItem 
+                  <ListItem
                     key={event.event_id}
                     p={4}
-                    shadow="md"
-                    backgroundColor={eventBackgroundColor(event.event.kind)}
+                    shadow="lg"
+                    borderRadius="md"
+                    bgGradient={eventBackgroundColor(event.event.kind)}
                   >
                     <Link href={`https://profile.intra.42.fr/events/${event.event.id}`} isExternal>
                       <Heading size="sm" mb={2}>{event.event.name}</Heading>
                     </Link>
                     <Flex align="center" mb={2}>
                       <Icon as={MdLocationOn} mr={2} />
-                      <Text fontSize="md"><strong>Location:</strong> {event.event.location ? event.event.location : "Unknown"}</Text>
+                      <Text fontSize="md">
+                        <strong>Location:</strong> {event.event.location ? event.event.location : "Unknown"}
+                      </Text>
                     </Flex>
                   </ListItem>
                 ))}
               </List>
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <Flex align="center">
-                  <Icon as={MdChecklistRtl} mr={2} />
-                  RNCP 7
-                </Flex>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
+            </TabPanel>
+
+            <TabPanel>
               <List spacing={2}>
-                <Link color='blue.400' fontWeight="bold" href='https://meta.intra.42.fr/articles/rncp-7-certificate'>
-                  <Flex align="center">
-                    Official Page Here
-                    <Icon as={MdArrowForward} ml={2} />
+                  <Flex align="center" color="blue.400" fontWeight="bold">
+                    <Link href="https://meta.intra.42.fr/articles/rncp-7-certificate">
+                      Official Page Here
+                    </Link>
+                    <Icon as={FaExternalLinkAlt} ml={2} />
                   </Flex>
-                </Link>
-                <Link color='pink.400' fontWeight="bold" href='https://meta.intra.42.fr/articles/graduation-jury'>
-                  <Flex align="center">
-                    Next Jury Here
-                    <Icon as={MdArrowForward} ml={2} />
+                  <Flex align="center" color="pink.400" fontWeight="bold">
+                    <Link href="https://meta.intra.42.fr/articles/graduation-jury">
+                      Next Jury Here
+                    </Link>
+                    <Icon as={FaExternalLinkAlt} ml={2} />
                   </Flex>
-                </Link>
                 <Text>Pour les 2 options, il vous faut :</Text>
                 <Grid pl={4}>
-                  <Flex align="center" color={profile.projects_users.find(p => p.project.slug === "ft_transcendence").status == "finished" ? "green.400" : "gray.500" } mb={2}>
-                    <Icon as={profile.projects_users.find(p => p.project.slug === "ft_transcendence")?.status == "finished" ? MdCheck : MdClear } mr={2} />
+                  <Flex
+                    align="center"
+                    color={profile.projects_users.find(p => p.project.slug === "ft_transcendence").status == "finished" ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={profile.projects_users.find(p => p.project.slug === "ft_transcendence")?.status == "finished" ? MdCheck : MdClear} mr={2} />
                     <Text>Completer le <strong>tronc commun</strong>.</Text>
                   </Flex>
                   <Flex align="center" mb={2}>
                     <Text>Avoir validé <strong>deux projets de groupe après le tronc commun.</strong></Text>
                   </Flex>
-                  <Flex align="center" color={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? "green.400" : "gray.500" } mb={2}>
-                    <Icon as={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? MdCheck : MdClear } mr={2} />
+                  <Flex
+                    align="center"
+                    color={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? MdCheck : MdClear} mr={2} />
                     <Text>Atteindre le level <strong>21</strong>. (Your Level: {profile.cursus_users[profile.cursus_users.length - 1].level})</Text>
                   </Flex>
-                  <Flex align="center" color={filteredEvents.length > 15 ? "green.400" : "gray.500" } mb={2}>
-                    <Icon as={filteredEvents.length > 15 ? MdCheck : MdClear } mr={2} />
+                  <Flex
+                    align="center"
+                    color={filteredEvents.length > 15 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={filteredEvents.length > 15 ? MdCheck : MdClear} mr={2} />
                     <Text>Avoir participé à au moins <strong>15 évènements pédagogiques</strong> depuis le début de votre cursus (hors event de type extern et association).</Text>
                   </Flex>
-                  <Flex align="center" color={numberOfInternship() > 2 ? "green.400" : "gray.500" } mb={2}>
-                  <Icon as={numberOfInternship() > 2 ? MdCheck : MdClear } mr={2} />
+                  <Flex
+                    align="center"
+                    color={numberOfInternship() > 2 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={numberOfInternship() > 2 ? MdCheck : MdClear} mr={2} />
                     <Text>Avoir au moins <strong>2 expériences professionnelles à temps plein</strong> dans votre cursus.</Text>
                   </Flex>
                 </Grid>
                 <Text>Valider <strong>un</strong> des projets de la catégorie <strong>""Suite""</strong> :</Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={suiteProjects} />
                 <Text><strong>Option 1:</strong> Système d'information et réseaux</Text>
-                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                <Text fontStyle="italic" color="gray.500" fontSize="sm">
                   Unix/Kernel - minimum 30000XP et minimum 2 projets.
                 </Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={option1ProjectsUnix} />
-                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                <Text fontStyle="italic" color="gray.500" fontSize="sm">
                   System administration - minimum 50000XP et 3 projets.
                 </Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={option1ProjectsSys} />
-                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                <Text fontStyle="italic" color="gray.500" fontSize="sm">
                   Security - minimum 50000XP et 3 projets.
                 </Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={option1ProjectsSec} />
                 <Text><strong>Option 2:</strong> Architecture des bases de données et data</Text>
-                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                <Text fontStyle="italic" color="gray.500" fontSize="sm">
                   Web - Database - minimum 50000XP et minimum 2 projets.
                 </Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={option2ProjectsWeb} />
-                <Text fontStyle="italic" color='gray.500' fontSize="sm">
+                <Text fontStyle="italic" color="gray.500" fontSize="sm">
                   Artificial Intelligence - minimum 70000XP et minimum 3 projets.
                 </Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={option2ProjectsAI} />
               </List>
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+            </TabPanel>
+            <TabPanel>
+              {/* TODO: RNCP 6 */}
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Box>
+
       <Stack spacing={4} mt={4}>
-        <Button onClick={() => setIsOpen(!isOpen)} colorScheme='teal'>
+        <Button onClick={() => setIsOpen(!isOpen)} boxShadow="lg" colorScheme='teal'>
           {isOpen ? 'Hide Debug' : 'Show Debug'}
         </Button>
         <Collapse in={isOpen}>

@@ -7,6 +7,8 @@ My own 42 API front build with FastAPI/Python & React/Vite/Chakra
 
 ![demo2](frontend/app/public/demo2.png)
 
+![demo3](frontend/app/public/demo3.png)
+
 ## Requirements
 
 - Install Docker
