@@ -23,6 +23,8 @@ Up the project
 make
 ```
 
+Open <http://localhost:3000>
+
 Stop it
 
 ```
