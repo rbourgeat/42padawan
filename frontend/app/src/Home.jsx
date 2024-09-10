@@ -436,7 +436,7 @@ const Home = () => {
                 
                 <ProjectBox 
                   title="Web - Database - minimum 50000XP et minimum 2 projets."
-                  optionProject={projectData.option2ProjectsWeb}
+                  optionProject={projectData.projectsWeb}
                   projects_users={profile.projects_users}
                   xpThreshold={50000}
                 />
@@ -451,7 +451,106 @@ const Home = () => {
               </List>
             </TabPanel>
             <TabPanel>
-              {/* TODO: RNCP 6 */}
+              <List spacing={2}>
+                <Flex align="center" color="blue.400" fontWeight="bold">
+                  <Link href="https://meta.intra.42.fr/articles/rncp-6-certificate">
+                    Official Page Here
+                  </Link>
+                  <Icon as={FaExternalLinkAlt} ml={2} />
+                </Flex>
+                <Flex align="center" color="pink.400" fontWeight="bold">
+                  <Link href="https://meta.intra.42.fr/articles/graduation-jury">
+                    Next Jury Here
+                  </Link>
+                  <Icon as={FaExternalLinkAlt} ml={2} />
+                </Flex>
+
+                <Text>Pour les 2 options, il vous faut :</Text>
+                <Grid pl={4}>
+                  <Flex
+                    align="center"
+                    color={profile.projects_users.find(p => p.project.slug === "ft_transcendence").status == "finished" ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={profile.projects_users.find(p => p.project.slug === "ft_transcendence")?.status == "finished" ? MdCheck : MdClear} mr={2} />
+                    <Text>Completer le <strong>tronc commun</strong>.</Text>
+                  </Flex>
+                  <Flex
+                    align="center"
+                    color={getGroupProject() > 2 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={getGroupProject() > 2 ? MdCheck : MdClear} mr={2} />
+                    <Text>Avoir validé <strong>deux projets de groupe après le tronc commun</strong>. (You have {getGroupProject()}/2)</Text>
+                  </Flex>
+                  <Flex
+                    align="center"
+                    color={profile.cursus_users[profile.cursus_users.length - 1].level > 17 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={profile.cursus_users[profile.cursus_users.length - 1].level > 17 ? MdCheck : MdClear} mr={2} />
+                    <Text>Atteindre le level <strong>17</strong>. (You are level {profile.cursus_users[profile.cursus_users.length - 1].level})</Text>
+                  </Flex>
+                  <Flex
+                    align="center"
+                    color={filteredEvents.length > 10 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={filteredEvents.length > 10 ? MdCheck : MdClear} mr={2} />
+                    <Text>Avoir participé à au moins <strong>10 évènements pédagogiques</strong> depuis le début de votre cursus (hors event de type extern et association). (You have {filteredEvents.length}/10)</Text>
+                  </Flex>
+                  <Flex
+                    align="center"
+                    color={numberOfInternship() > 2 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={numberOfInternship() > 2 ? MdCheck : MdClear} mr={2} />
+                    <Text>Avoir au moins <strong>2 expériences professionnelles à temps plein</strong> dans votre cursus. (You have {numberOfInternship()}/2)</Text>
+                  </Flex>
+                </Grid>
+                <Text>Valider <strong>un</strong> des projets de la catégorie <strong>""Suite""</strong> :</Text>
+                <ProjectsCheck projects_users={profile.projects_users} projects={projectData.suiteProjects} />
+
+                <Text m={4}><strong>Option 1:</strong> Développement web et mobile</Text>
+
+                <ProjectBox 
+                  title="Web - minimum 15000XP et minimum 2 projets."
+                  optionProject={projectData.projectsWeb}
+                  projects_users={profile.projects_users}
+                  xpThreshold={15000}
+                />
+
+                <ProjectBox 
+                  title="Mobile - minimum 10000XP et minimum 2 projets."
+                  optionProject={projectData.option1ProjectsMobile}
+                  projects_users={profile.projects_users}
+                  xpThreshold={10000}
+                />
+
+                <Text m={4}><strong>Option 2:</strong> Développement applicatif</Text>
+
+                <ProjectBox 
+                  title="Object Oriented Programming - minimum 10000XP et minimum 2 projets."
+                  optionProject={projectData.option2ProjectsOOP}
+                  projects_users={profile.projects_users}
+                  xpThreshold={10000}
+                />
+
+                <ProjectBox 
+                  title="Functional programming - minimum 10000XP et minimum 2 projets."
+                  optionProject={projectData.option2ProjectsFunc}
+                  projects_users={profile.projects_users}
+                  xpThreshold={10000}
+                />
+
+                <ProjectBox 
+                  title="Imperative programming - minimum 10000XP et minimum 2 projets."
+                  optionProject={projectData.option2ProjectsImp}
+                  projects_users={profile.projects_users}
+                  xpThreshold={10000}
+                />
+
+              </List>
             </TabPanel>
           </TabPanels>
         </Tabs>

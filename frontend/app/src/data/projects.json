@@ -65,7 +65,7 @@
     { "slug": "", "name": "MicroForensX", "group": false, "xp": 0 },
     { "slug": "", "name": "ActiveTechTales", "group": false, "xp": 0 }
   ],
-  "option2ProjectsWeb": [
+  "projectsWeb": [
     { "slug": "42cursus-piscine-php-symfony", "name": "Piscine PHP Symfony", "group": false, "xp": 9450 },
     { "slug": "piscine-django", "name": "Piscine python Django", "group": false, "xp": 9450 },
     { "slug": "42cursus-piscine-ruby-on-rails", "name": "Piscine Ruby on Rails", "group": false, "xp": 9450 },
@@ -91,5 +91,66 @@
     { "slug": "leaffliction", "name": "Leaffliction", "group": true, "xp": 15750 },
     { "slug": "piscine-data-science", "name": "Piscine Data Science", "group": false, "xp": 4180 },
     { "slug": "python-for-data-science", "name": "Piscine Python for Data Science", "group": false, "xp": 4180 }
+  ],
+  "option1ProjectsMobile": [
+    { "slug": "42cursus-ft_hangouts", "name": "ft_hangouts", "group": false, "xp": 4200 },
+    { "slug": "42cursus-swifty-companion", "name": "Swifty_companion", "group": false, "xp": 4200 },
+    { "slug": "42cursus-swifty-proteins", "name": "Swifty_proteins", "group": true, "xp": 15750 },
+    { "slug": "mobile", "name": "Piscine Mobile", "group": false, "xp": 9450 }
+  ],
+  "option2ProjectsOOP": [
+    { "slug": "42cursus-bomberman", "name": "Bomberman", "group": true, "xp": 25200 },
+    { "slug": "42cursus-nibbler", "name": "Nibbler", "group": true, "xp": 9450 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 }
+  ],
+  "option2ProjectsFunc": [
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 }
+  ],
+  "option2ProjectsImp": [
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 },
+    { "slug": "", "name": "", "group": false, "xp": 0 }
   ]
 }
