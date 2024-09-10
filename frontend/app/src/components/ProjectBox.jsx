@@ -10,9 +10,10 @@ import ProjectsCheck from './ProjectsCheck';
 
 const ProjectBox = ({ title, projects_users, optionProject, xpThreshold }) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const isXpSufficient = isXpGreaterThanX(optionProject, xpThreshold);
+  const projectsXP = getTotalXP(optionProject);
+  const isXpSufficient = projectsXP > xpThreshold;
 
-  function isXpGreaterThanX(projects, x) {
+  function getTotalXP(projects) {
     let totalXp = 0;
     let i = 0;
     
@@ -20,13 +21,13 @@ const ProjectBox = ({ title, projects_users, optionProject, xpThreshold }) => {
       const match = projects_users.find(p => p.project.slug === projects[i].slug);
       
       if (match) {
-        totalXp += projects[i].xp;
+        totalXp += projects[i].xp * (match.final_mark / 100);
       }
       
       i++;
     }
 
-    return totalXp > x;
+    return totalXp;
   }
 
   return (
@@ -34,22 +35,22 @@ const ProjectBox = ({ title, projects_users, optionProject, xpThreshold }) => {
         border="2px" 
         borderColor={isXpSufficient ? 'green.400' : 'gray.500'} 
         position="relative"
-        boxShadow="lg"
+        boxShadow="md"
         borderRadius="md"
         m={4}
         p={4}
       >
         <Text 
-          fontStyle="italic" 
-          color={isXpSufficient ? 'green.400' : 'gray.500'} 
-          fontSize="sm"
+          background={colorMode === "light" ? "#ffffff" : "#1a202c"}
+          color={isXpSufficient ? 'green.400' : 'gray.500'}
           position="absolute"
+          fontStyle="italic" 
+          fontSize="sm"
           top="-10px"
           left="15px"
-          background={colorMode === "light" ? "#ffffff" : "#1a202c"}
           px={2}
         >
-          {title}
+          {title} (You have {projectsXP}XP)
         </Text>
         <ProjectsCheck 
           projects_users={projects_users}

@@ -366,7 +366,7 @@ const Home = () => {
                     mb={2}
                   >
                     <Icon as={profile.cursus_users[profile.cursus_users.length - 1].level > 21 ? MdCheck : MdClear} mr={2} />
-                    <Text>Atteindre le level <strong>21</strong>. (Your Level: {profile.cursus_users[profile.cursus_users.length - 1].level})</Text>
+                    <Text>Atteindre le level <strong>21</strong>. (You are level {profile.cursus_users[profile.cursus_users.length - 1].level})</Text>
                   </Flex>
                   <Flex
                     align="center"
