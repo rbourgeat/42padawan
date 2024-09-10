@@ -1,10 +1,5 @@
 import React from 'react';
 import { Box, Text, useColorMode } from '@chakra-ui/react';
-import { 
-  MdCheck,
-  MdClear,
-  MdOutlineHourglassTop
-} from 'react-icons/md';
 
 import ProjectsCheck from './ProjectsCheck';
 

@@ -189,6 +189,22 @@ const Home = () => {
     return n;
   };
 
+  function getGroupProject() {
+    let numberOfGroupProject = 0;
+    
+    Object.keys(projectData).forEach((key) => {
+      const projects = projectData[key];
+  
+      for (let i = 0; i < projects.length; i++) {
+        if (projects[i].group) {
+          numberOfGroupProject += 1;
+        }
+      }
+    });
+
+    return numberOfGroupProject;
+  }
+
   return (
     <Box p={8}>
       <Flex justify="flex-end" align="center" mb={6} position="absolute" top={4} right={4} zIndex="999">
@@ -357,8 +373,13 @@ const Home = () => {
                     <Icon as={profile.projects_users.find(p => p.project.slug === "ft_transcendence")?.status == "finished" ? MdCheck : MdClear} mr={2} />
                     <Text>Completer le <strong>tronc commun</strong>.</Text>
                   </Flex>
-                  <Flex align="center" mb={2}>
-                    <Text>Avoir validé <strong>deux projets de groupe après le tronc commun.</strong></Text>
+                  <Flex
+                    align="center"
+                    color={getGroupProject() > 2 ? "green.400" : "gray.500"}
+                    mb={2}
+                  >
+                    <Icon as={getGroupProject() > 2 ? MdCheck : MdClear} mr={2} />
+                    <Text>Avoir validé <strong>deux projets de groupe après le tronc commun</strong>. (You have {getGroupProject()}/2)</Text>
                   </Flex>
                   <Flex
                     align="center"
@@ -374,7 +395,7 @@ const Home = () => {
                     mb={2}
                   >
                     <Icon as={filteredEvents.length > 15 ? MdCheck : MdClear} mr={2} />
-                    <Text>Avoir participé à au moins <strong>15 évènements pédagogiques</strong> depuis le début de votre cursus (hors event de type extern et association).</Text>
+                    <Text>Avoir participé à au moins <strong>15 évènements pédagogiques</strong> depuis le début de votre cursus (hors event de type extern et association). (You have {filteredEvents.length}/15)</Text>
                   </Flex>
                   <Flex
                     align="center"
@@ -382,12 +403,12 @@ const Home = () => {
                     mb={2}
                   >
                     <Icon as={numberOfInternship() > 2 ? MdCheck : MdClear} mr={2} />
-                    <Text>Avoir au moins <strong>2 expériences professionnelles à temps plein</strong> dans votre cursus.</Text>
+                    <Text>Avoir au moins <strong>2 expériences professionnelles à temps plein</strong> dans votre cursus. (You have {numberOfInternship()}/2)</Text>
                   </Flex>
                 </Grid>
                 <Text>Valider <strong>un</strong> des projets de la catégorie <strong>""Suite""</strong> :</Text>
                 <ProjectsCheck projects_users={profile.projects_users} projects={projectData.suiteProjects} />
-                
+
                 <Text m={4}><strong>Option 1:</strong> Système d'information et réseaux</Text>
 
                 <ProjectBox 
