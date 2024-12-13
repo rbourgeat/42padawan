@@ -176,7 +176,8 @@ const Home = () => {
       "fr-apprentissage-rncp-6-1-an",
       "fr-apprentissage-rncp-6-2-ans",
       "42cursus-apprentissage-2-ans-1ere-annee",
-      "apprentissage-2-ans-2eme-annee"
+      "apprentissage-2-ans-2eme-annee",
+      "fr-alternance-rncp7-1-an"
     ];
   
     const statuses = projects.map(slug => {
@@ -399,10 +400,10 @@ const Home = () => {
                   </Flex>
                   <Flex
                     align="center"
-                    color={numberOfInternship() > 2 ? "green.400" : "gray.500"}
+                    color={numberOfInternship() >= 2 ? "green.400" : "gray.500"}
                     mb={2}
                   >
-                    <Icon as={numberOfInternship() > 2 ? MdCheck : MdClear} mr={2} />
+                    <Icon as={numberOfInternship() >= 2 ? MdCheck : MdClear} mr={2} />
                     <Text>Avoir au moins <strong>2 expériences professionnelles à temps plein</strong> dans votre cursus. (You have {numberOfInternship()}/2)</Text>
                   </Flex>
                 </Grid>
